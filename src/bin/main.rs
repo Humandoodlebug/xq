@@ -161,7 +161,7 @@ fn get_json_style() -> colored_json::Styler {
                     3 => vec![&mut styler.integer_value, &mut styler.float_value],
                     4 => vec![&mut styler.string_value],
                     5 => vec![&mut styler.array_brackets],
-                    6 => vec![&mut styler.object_brackets],
+                    6 => vec![&mut styler.object_brackets, &mut styler.object_colon],
                     _ => continue,
                 };
 
@@ -202,6 +202,7 @@ fn get_json_style() -> colored_json::Styler {
 
     let mut styler = colored_json::Styler {
         nil_value: colored_json::Style::new(colored_json::Color::Default).dimmed(),
+        object_colon: colored_json::Style::default().bold(),
         ..Default::default()
     };
     set_env_colors(&mut styler).unwrap_or_else(|_| eprintln!("Failed to set $JQ_COLORS"));
